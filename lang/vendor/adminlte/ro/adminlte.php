@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'full_name' => 'Nume complet',
+    'email' => 'Email',
+    'password' => 'Parolă',
+    'retype_password' => 'Reintrodu parola',
+    'remember_me' => 'Ține-mă minte',
+    'register' => 'Înregistrare',
+    'register_a_new_membership' => 'Înregistrează un cont nou',
+    'i_forgot_my_password' => 'Am uitat parola',
+    'i_already_have_a_membership' => 'Am deja un cont',
+    'sign_in' => 'Autentificare',
+    'log_out' => 'Deconectare',
+    'toggle_navigation' => 'Comută navigarea',
+    'login_message' => 'Autentifică-te pentru a începe sesiunea',
+    'register_message' => 'Înregistrează un cont nou',
+    'password_reset_message' => 'Resetează parola',
+    'reset_password' => 'Resetează parola',
+    'send_password_reset_link' => 'Trimite link de resetare a parolei',
+    'verify_message' => 'Contul tău necesită verificare',
+    'verify_email_sent' => 'Un nou link de verificare a fost trimis pe adresa ta de email.',
+    'verify_check_your_email' => 'Înainte de a continua, verifică-ți emailul pentru linkul de verificare.',
+    'verify_if_not_recieved' => 'Dacă nu ai primit emailul',
+    'verify_request_another' => 'apasă aici pentru a solicita altul',
+    'confirm_password_message' => 'Te rugăm să confirmi parola pentru a continua.',
+    'remember_me_hint' => 'Păstrează-mă autentificat pe termen nelimitat sau până mă deconectez manual',
+];
