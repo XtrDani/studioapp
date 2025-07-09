@@ -63,7 +63,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Service::class);
     }
 
-    public function adminlte_profile_url(){
+    public function adminlte_profile_url()
+    {
         return "/profile";
     }
 
@@ -92,8 +93,7 @@ class User extends Authenticatable
 
         if (!empty($userImage)) {
             return asset('uploads/images/profile/' . $userImage);
-        }
-        else{
+        } else {
             return asset('vendor/adminlte/dist/img/gravtar.jpg');
         }
     }
@@ -105,8 +105,7 @@ class User extends Authenticatable
 
         if (!empty($userImage)) {
             return asset('uploads/images/profile/' . $userImage);
-        }
-        else{
+        } else {
             return asset('vendor/adminlte/dist/img/gravtar.jpg');
         }
     }

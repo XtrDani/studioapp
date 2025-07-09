@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    <img src="{{ asset('uploads/images/logo.jpg') }}" alt="Traditional Harmony Studio Logo"
+                    <img src="{{ asset('uploads/images/logoul.jpg') }}" alt="Traditional Harmony Studio Logo"
                         style="height:48px; width:auto; max-width:160px;" class="align-middle me-2" />
                     Traditional Harmony Studio
                 </a>

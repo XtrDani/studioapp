@@ -93,6 +93,7 @@ class DatabaseSeeder extends Seeder
             'status' => 1,
             'email_verified_at' => now(),
             'password' => Hash::make('admin123'),
+            'image' => 'AdminLTELogo.jpg',
         ]);
 
         // Assign specific permissions to the 'moderator' role
@@ -118,21 +119,31 @@ class DatabaseSeeder extends Seeder
         // Assign the 'admin' role to the user
         $user->assignRole($adminRole);
 
-
-
-        // Create admin as employee with additional details
-        $employee = Employee::create([
-            'user_id' => $user->id,
-            'days' => [
-                "monday" => ["06:00-22:00"],
-                "tuesday" => ["06:00-15:00", "16:00-22:00"],
-                "wednesday" => ["09:00-12:00", "14:00-23:00"],
-                "thursday" => ["09:00-20:00"],
-                "friday" => ["06:00-17:00"],
-                "saturday" => ["05:00-18:00"]
-            ],
-            'slot_duration' => 30
-        ]);
+        // === Creează 9 angajați (users cu rol de employee și înregistrare în employees) ===
+        for ($i = 1; $i <= 9; $i++) {
+            $employeeUser = User::create([
+                'name' => "Angajat $i",
+                'email' => "angajat$i@example.com",
+                'phone' => '070000000' . $i,
+                'status' => 1,
+                'email_verified_at' => now(),
+                'password' => Hash::make('parola123'),
+                'image' => 'gravtar.jpg',
+            ]);
+            $employeeUser->assignRole($employeeRole);
+            Employee::create([
+                'user_id' => $employeeUser->id,
+                'days' => [
+                    "monday" => ["06:00-22:00"],
+                    "tuesday" => ["06:00-15:00", "16:00-22:00"],
+                    "wednesday" => ["09:00-12:00", "14:00-23:00"],
+                    "thursday" => ["09:00-20:00"],
+                    "friday" => ["06:00-17:00"],
+                    "saturday" => ["05:00-18:00"]
+                ],
+                'slot_duration' => 30
+            ]);
+        }
 
         return $user;
     }
