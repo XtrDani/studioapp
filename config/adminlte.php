@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Title
@@ -315,7 +314,6 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
-
         [
             'text' => 'Dashboard',
             'route' => 'home',
@@ -326,79 +324,72 @@ return [
             'text' => ' All Appointments',
             'route' => 'appointments',
             'icon' => 'fas fa-calendar-check',
-            'can' => 'appointments.view | appointments.create | appointments.edit | appointments.delete',
-
+            'can' => ['appointments.view', 'appointments.create', 'appointments.edit', 'appointments.delete'],
         ],
 
         [
             'text' => 'Categories',
             'icon' => 'fas fa-fw fa-folder',
             'url' => 'category*',
-            'can' => 'categories.view | categories.create | categories.edit | categories.delete',
+            'can' => ['categories.view', 'categories.create', 'categories.edit', 'categories.delete'],
             'submenu' => [
                 [
                     'text' => 'Add New',
                     'icon' => 'fas fa-fw fa-plus',
                     'route' => 'category.create',
-                    'can' => 'categories.create'
+                    'can' => ['categories.create']
                 ],
                 [
                     'text' => 'View All',
                     'icon' => 'fas fa-fw fa-eye',
                     'route' => 'category.index',
-                    'can' => 'categories.view'
+                    'can' => ['categories.view']
                 ],
-
             ],
         ],
         [
             'text' => 'Users',
             'url' => 'user*',
             'icon' => 'fas fa-fw fa-users',
-            'can' => 'users.view | users.create | users.edit | users.delete',
+            'can' => ['users.view', 'users.create', 'users.edit', 'users.delete'],
             'submenu' => [
                 [
                     'text' => 'Add New',
                     'icon' => 'fas fa-fw fa-plus',
                     'route' => 'user.create',
-                    'can' => 'users.create',
+                    'can' => ['users.create'],
                 ],
                 [
                     'text' => 'View All',
                     'icon' => 'fas fa-users',
                     'route' => 'user.index',
                 ],
-
-
-
             ],
         ],
         [
             'text' => 'Services',
             'url' => 'service*',
             'icon' => 'fas fa-fw fa-briefcase',
-            'can' => 'services.view | services.create | services.edit | services.delete',
+            'can' => ['services.view', 'services.create', 'services.edit', 'services.delete'],
             'submenu' => [
-
                 [
                     'text' => 'Create Service',
                     'icon' => 'fas fa-fw fa-plus',
                     'route' => 'service.create',
-                    'can' => 'services.create'
+                    'can' => ['services.create']
                 ],
                 [
                     'text' => 'View All',
                     'icon' => 'fas fa-fw fa-eye',
                     'route' => 'service.index',
-                    'can' => 'services.view'
+                    'can' => ['services.view']
                 ],
                 [
                     'text' => 'View Trash',
                     'icon' => 'fas fa-fw fa-trash',
                     'route' => 'service.trash',
-                    'can' => 'services.view'
+                    'can' => ['services.view']
                 ],
-
             ],
         ],
         [

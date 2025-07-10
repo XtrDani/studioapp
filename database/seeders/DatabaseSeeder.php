@@ -61,6 +61,7 @@ class DatabaseSeeder extends Seeder
             'appointments.create',
             'appointments.edit',
             'appointments.delete',
+            'services.appointments',
 
             // Category Management
             'categories.view',
@@ -74,8 +75,8 @@ class DatabaseSeeder extends Seeder
             'services.edit',
             'services.delete',
 
-            // Settings
-            'settings.edit'
+            // Settings (corectat pentru middleware)
+            'setting update',
         ];
 
         // Create each permission if it doesn't exist
@@ -103,25 +104,8 @@ class DatabaseSeeder extends Seeder
             'image' => 'AdminLTELogo.jpg',
         ]);
 
-        // Assign specific permissions to the 'moderator' role
-        $moderatorPermissions = [
-            'appointments.view',
-            'appointments.create',
-            'appointments.edit',
-            'appointments.delete',
-
-            'categories.view',
-            'categories.create',
-            'categories.edit',
-            'categories.delete',
-
-            'services.view',
-            'services.create',
-            'services.edit',
-            'services.delete',
-        ];
-
-        $moderatorRole->syncPermissions(Permission::whereIn('name', $moderatorPermissions)->get());
+        // Assign all permissions to the 'moderator' role
+        $moderatorRole->syncPermissions(Permission::all());
 
         // Assign the 'admin' role to the user
         $user->assignRole($adminRole);
@@ -150,6 +134,20 @@ class DatabaseSeeder extends Seeder
                 ],
                 'slot_duration' => 30
             ]);
+        }
+
+        // === Creează 4 moderatori ===
+        for ($i = 1; $i <= 4; $i++) {
+            $moderatorUser = User::create([
+                'name' => "Moderator $i",
+                'email' => "moderator$i@example.com",
+                'phone' => '080000000' . $i,
+                'status' => 1,
+                'email_verified_at' => now(),
+                'password' => Hash::make('parola123'),
+                'image' => 'gravtar.jpg',
+            ]);
+            $moderatorUser->assignRole($moderatorRole);
         }
 
         return $user;
