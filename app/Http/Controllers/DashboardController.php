@@ -20,7 +20,7 @@ class DashboardController extends Controller
 
         // Only admins can see all data - no conditions added
         if (!$user->hasRole('admin')) {
-            $query->where(function($q) use ($user) {
+            $query->where(function ($q) use ($user) {
                 if ($user->employee) {
                     $q->where('employee_id', $user->employee->id);
                 }
@@ -55,7 +55,8 @@ class DashboardController extends Controller
 
                 return [
                     'id' => $appointment->id, // Add appointment ID
-                    'title' => sprintf('%s - %s',
+                    'title' => sprintf(
+                        '%s - %s',
                         $appointment->name,
                         $appointment->service->title ?? 'Service'
                     ),
@@ -102,6 +103,11 @@ class DashboardController extends Controller
     // In AppointmentController.php
     public function updateStatus(Request $request)
     {
+        // Permite doar admin, moderator, employee
+        if (!auth()->user()->hasAnyRole(['admin', 'moderator', 'employee'])) {
+            abort(403, 'Nu ai voie să modifici statusul!');
+        }
+
         $request->validate([
             'appointment_id' => 'required|exists:appointments,id',
             'status' => 'required|in:Pending payment,Processing,Confirmed,Cancelled,Completed,On Hold,No Show'
