@@ -87,6 +87,14 @@
     </div>
 </form>
 
+@hasanyrole('admin|moderator')
+<div class="mb-3">
+    <a href="{{ route('reports.fiscal') }}" class="btn btn-success">
+        <i class="fas fa-file-invoice-dollar"></i> Raport Fiscal Venituri
+    </a>
+</div>
+@endhasanyrole
+
 @stop
 
 @section('css')

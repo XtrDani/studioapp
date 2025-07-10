@@ -31,6 +31,13 @@ class DatabaseSeeder extends Seeder
             $user = $this->createInitialUserWithPermissions();
             $this->createCategoriesAndServices($user);
         }
+
+        // Șterge toate programările (inclusiv soft-deleted) înainte de seed
+        \App\Models\Appointment::withTrashed()->forceDelete();
+        // Populează cu venituri din programări finalizate
+        if (\App\Models\Service::count() > 0 && \App\Models\Employee::count() > 0) {
+            \App\Models\Appointment::factory()->count(30)->create();
+        }
     }
 
     protected function createInitialUserWithPermissions()

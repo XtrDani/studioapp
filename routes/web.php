@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
         dd($request->all())->toArray();
     })->name('test');
 
+    Route::get('reports/fiscal', [\App\Http\Controllers\ReportController::class, 'fiscalRevenue'])->name('reports.fiscal')->middleware('permission:appointments.view');
 });
 
 
