@@ -12,10 +12,13 @@ use App\Events\StatusUpdated;
 class AppointmentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $appointments = Appointment::latest()->get();
-        // dd($appointments); // for debugging only
+        $query = Appointment::query();
+        if ($request->filled('from_date') && $request->filled('to_date')) {
+            $query->whereBetween('booking_date', [$request->from_date, $request->to_date]);
+        }
+        $appointments = $query->latest()->get();
         return view('backend.appointment.index', compact('appointments'));
     }
 
@@ -47,7 +50,7 @@ class AppointmentController extends Controller
             'status' => 'required|string',
         ]);
 
-            // Set user_id if not provided but user is authenticated
+        // Set user_id if not provided but user is authenticated
         // if (auth()->check() && !$request->has('user_id')) {
         //     $validated['user_id'] = auth()->id();
         // }
@@ -58,7 +61,7 @@ class AppointmentController extends Controller
             auth()->user()->hasRole('employee')
         );
 
-            // If admin/moderator/employee is booking, user_id should be null
+        // If admin/moderator/employee is booking, user_id should be null
         if ($isPrivilegedRole) {
             $validated['user_id'] = null;
         } elseif (auth()->check() && !$request->has('user_id')) {

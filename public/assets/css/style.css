@@ -1,9 +1,11 @@
-
 :root {
     --primary-color: #4e73df;
     --secondary-color: #f8f9fc;
     --accent-color: #2e59d9;
     --text-color: #5a5c69;
+    --success-color: #22C55E;  /* Green 500 */
+    --warning-color: #FACC15;  /* Yellow 400 */
+    --danger-color: #EF4444;   /* Red 500 */
 }
 
 body {
