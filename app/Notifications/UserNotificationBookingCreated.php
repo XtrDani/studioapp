@@ -38,18 +38,19 @@ class UserNotificationBookingCreated extends Notification implements ShouldQueue
 
 
         return (new MailMessage)
-        ->greeting('Hello '.$this->appointment['name'])
-        ->line('Thanks for your booking with us')
-        ->subject('New Booking Created' )
-        ->line('**Appointment Details:**')  // make content strong
-        ->line('Name: '. $this->appointment['name'])
-        ->line('Phone: '. $this->appointment['phone'])
-        // ->line('Category: '. $this->appointment->service->category['title'])
-        ->line('Service: '. $this->appointment->service['title'])
-        ->line('Amount: '. $this->appointment['amount'])
-        ->line('Appointment Date : ' . Carbon::parse($this->appointment['booking_date'])->format('d M Y'))
-        ->line('Slot Time: '. $this->appointment['booking_time'])
-        ->line('Thank you for using our application !');
+            ->greeting('Hello ' . $this->appointment['name'])
+            ->line('Thanks for your booking with us')
+            ->subject('New Booking Created')
+            ->line('**Appointment Details:**')  // make content strong
+            ->line('Name: ' . $this->appointment['name'])
+            ->line('Phone: ' . $this->appointment['phone'])
+            // ->line('Category: '. $this->appointment->service->category['title'])
+            ->line('Service: ' . $this->appointment->service['title'])
+            ->line('Amount: ' . $this->appointment['amount'])
+            ->line('Appointment Date : ' . Carbon::parse($this->appointment['booking_date'])->format('d M Y'))
+            ->line('Slot Time: ' . $this->appointment['booking_time'])
+            ->line('Payment will be done physically !');
+
     }
 
     /**

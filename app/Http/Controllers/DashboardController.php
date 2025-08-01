@@ -18,8 +18,8 @@ class DashboardController extends Controller
         // Start with base query
         $query = Appointment::query()->with(['employee.user', 'service', 'user']);
 
-        // Only admins can see all data - no conditions added
-        if (!$user->hasRole('admin')) {
+        // Only admins, moderators, and employees can see all data - no conditions added
+        if (!$user->hasAnyRole(['admin', 'moderator', 'employee'])) {
             $query->where(function ($q) use ($user) {
                 if ($user->employee) {
                     $q->where('employee_id', $user->employee->id);
@@ -28,8 +28,12 @@ class DashboardController extends Controller
             });
         }
 
+        // DEBUG: Log appointments count and user roles
+        \Log::info('User roles: ' . json_encode($user->getRoleNames()));
+        $appointmentsRaw = $query->get();
+        \Log::info('Appointments found: ' . $appointmentsRaw->count());
         // Format the appointments with proper date handling
-        $appointments = $query->get()->map(function ($appointment) {
+        $appointments = $appointmentsRaw->map(function ($appointment) {
             try {
                 if (!str_contains($appointment->booking_time ?? '', '-')) {
                     throw new \Exception("Invalid time format");
@@ -79,7 +83,7 @@ class DashboardController extends Controller
             }
         })->filter();
 
-        return view('backend.dashboard.index', compact('appointments'));
+        return view('backend.dashboard.index', ['appointments' => array_values($appointments->toArray())]);
     }
 
     // Helper function to get color based on status

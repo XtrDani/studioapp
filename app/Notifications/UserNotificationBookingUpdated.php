@@ -35,19 +35,19 @@ class UserNotificationBookingUpdated extends Notification implements ShouldQueue
 
 
         return (new MailMessage)
-        ->greeting('Hello '.$this->appointment['name'])
-        ->line('Your Booking status has been updated to: '.$this->appointment['status'])
-        ->subject('Booking Status Updated' )
-        ->line('**Appointment Details:**')  // make content strong
-        ->line('Name: '. $this->appointment['name'])
-        ->line('Phone: '. $this->appointment['phone'])
-        // ->line('Category: '. $this->appointment->service->category['title'])
-        ->line('Service: '. $this->appointment->service['title'])
-        ->line('Staff: '. $this->appointment->employee->user['name'])
-        ->line('Amount: '. $this->appointment['amount'])
-        ->line('Appointment Date : ' . Carbon::parse($this->appointment['booking_date'])->format('d M Y'))
-        ->line('Slot Time: '. $this->appointment['booking_time'])
-        ->line('Thank you for using our application !');
+            ->greeting('Hello ' . $this->appointment['name'])
+            ->line('Your Booking status has been updated to: ' . $this->appointment['status'])
+            ->subject('Booking Status Updated')
+            ->line('**Appointment Details:**')  // make content strong
+            ->line('Name: ' . $this->appointment['name'])
+            ->line('Phone: ' . $this->appointment['phone'])
+            // ->line('Category: '. $this->appointment->service->category['title'])
+            ->line('Service: ' . $this->appointment->service['title'])
+            ->line('Staff: ' . $this->appointment->employee->user['name'])
+            ->line('Amount: ' . $this->appointment['amount'])
+            ->line('Appointment Date : ' . Carbon::parse($this->appointment['booking_date'])->format('d M Y'))
+            ->line('Slot Time: ' . $this->appointment['booking_time'])
+            ->line('Thank you for using our application ! ');
     }
 
     /**
